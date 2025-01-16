@@ -18,3 +18,23 @@ createRoot(document.getElementById("nav_menu")!).render(
     <NavigationMenu />
   </StrictMode>
 );
+
+createRoot(document.getElementById("nav_bar")!).render(
+  <StrictMode>
+    <NavBar />
+  </StrictMode>
+);
+
+createRoot(document.getElementById("info_login")!).render(
+  <StrictMode>
+    <UserProv>
+      <NavigationBar />
+    </UserProv>
+  </StrictMode>
+);
+
+createRoot(document.getElementById("combo_login")!).render(
+  <StrictMode>
+    <ComboLogin />
+  </StrictMode>
+);

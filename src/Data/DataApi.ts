@@ -281,5 +281,17 @@ export const updateUser = async (user: User)  : Promise<User> => {
   }
 };
 
+export const createUser = async (user: User)  : Promise<User> => {
+    
+  try {
+    const response = await axios.post(
+      "http://localhost:8181/api/v1/createUser", user
+    );
+    return response.data
+  } catch (error) {
+    throw error;
+  }
+};
+
 
 

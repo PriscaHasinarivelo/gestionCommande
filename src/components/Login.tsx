@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "./Utilisateur/Utilisateur";
 import { useNavigate } from "react-router-dom";
 import { User } from "../Data/Data";
-import { listeUtilisateur, updateUser } from "../Data/DataApi";
+import { listeUtilisateur, updateUser, createUser } from "../Data/DataApi";
 import Login from "../route/Login";
 
 function LoginPage() {
@@ -22,7 +22,17 @@ function LoginPage() {
     try {
       const result = await listeUtilisateur();
       setAllUser(result);
-      console.log(allUser);
+      if (result.length === 0) {
+        //si sans utilisateur alors créer un user par défaut
+        let newUser: User = {
+          id: 0,
+          username: "caissier",
+          email: "caissier@gmail.com",
+          password: "caissier",
+          is_connected: "false",
+        };
+        await createUser(newUser);
+      }
     } catch (error) {
       console.error("Erreur lors de la récupération des données", error);
     }
@@ -90,7 +100,9 @@ function LoginPage() {
     navigate("/connected_page");
   };
 
-  useEffect(() => {}, [utilisateurConnecte, listUtilisateur, allUser]);
+  useEffect(() => {
+    getAllUser();
+  }, [utilisateurConnecte, listUtilisateur, allUser]);
 
   return (
     <>
